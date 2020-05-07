@@ -1,0 +1,11 @@
+.card
+{
+    padding: 30px;
+    border: black;
+    border-style: dashed;
+}
+
+.wrapper
+{
+    padding:100px;
+}

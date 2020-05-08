@@ -80,7 +80,8 @@ export default class LoginScreen extends Component
       console.log('.json():',response);
 
       this.setState({error_message:response.message});
-      switch(response.status)
+      console.log('code:',code);
+      switch(code)
       {
         case 200:
           localStorage.setItem("access_token",response.access_token);
@@ -88,9 +89,10 @@ export default class LoginScreen extends Component
           //history.push('/home');
           
           this.setState({redirect:true});
+          console.log(this.state);
           break;
-        case 204:
-          this.setState({username:"",password:""});
+        case 202:
+          this.setState({password:""});
           //this.setState({error_message:'Username and password don\'t match. Try again.'});
           break;
         case 404:
@@ -106,6 +108,7 @@ export default class LoginScreen extends Component
   //200 code: success
   register()
   {
+    let code = -1;
     console.log('register lol');
     const submit_url = 'http://localhost:4000/api/register';  //config.backend_hostname 
     fetch(submit_url, {
@@ -125,14 +128,32 @@ export default class LoginScreen extends Component
     })
     //.then(response => response.json())
 
-    //TODO: 
-    //if 200: save access token to localstorage, redirect to home page using useHistory
-    //if 204: wipe input fields, say password wrong (probably link a "message_at_bottom" state to the jsx)
-    //if 404: wipe input fields, say username not found
     .then(response =>
     {
+      code = response.status;
+      return response.json();
+    })
+    .then(response =>
+    {
+      console.log('.json():',response);
 
-
+      this.setState({error_message:response.message});
+      console.log(code);
+      switch(code)
+      {
+        case 200:
+          localStorage.setItem("access_token",response.access_token);
+          console.log(localStorage);
+          //history.push('/home');
+          
+          this.setState({redirect:true});
+          break;
+        case 202:
+          console.log('hi doing 202 handling');
+          this.setState({username:"",password:""});
+          //this.setState({error_message:'Username and password don\'t match. Try again.'});
+          break;
+      }
     })
   }
 

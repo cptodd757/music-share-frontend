@@ -21,8 +21,9 @@ export default class LoginScreen extends Component
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.submit = this.submit.bind(this);
+    this.login = this.login.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
+    this.register = this.register.bind(this);
   }
 
   handleChange(event)
@@ -36,11 +37,79 @@ export default class LoginScreen extends Component
   }
 
   //TODO: once submitted, if right, reidrect to a home page. else try again
-  submit()
+  login()
   {
+    let code = -1;
     const submit_url = 'http://localhost:4000/api/login';  //config.backend_hostname 
     fetch(submit_url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': new Buffer(this.state.username + ':' + this.state.password).toString('base64')
+      }//,
+      //redirect: 'follow', // manual, *follow, error
+      //referrer: 'no-referrer'// no-referrer, *client
+      // body: JSON.stringify({username:this.state.username,
+      //                       password:this.state.password}), // body data type must match "Content-Type" header
+    })
+    //.then(response => response.json())
+
+    //TODO: 
+    //if 200: save access token to localstorage, redirect to home page using useHistory
+    //if 204: wipe input fields, say password wrong (probably link a "message_at_bottom" state to the jsx)
+    //if 404: wipe input fields, say username not found
+    .then(response =>
+    {
+      console.log(response);
+      console.log('code:');
+      console.log(response.status);
+      code = response.status;
+      console.log(code);
+      //var data = response.json();
+      //console.log(data, data['message']);
+      console.log(response.body);
+      console.log(JSON.stringify(response.body));
+      return response.json();
+    })
+    .then(response => 
+    {
+      console.log('.json():',response);
+
+      this.setState({error_message:response.message});
+      switch(response.status)
+      {
+        case 200:
+          localStorage.setItem("access_token",response.access_token);
+          console.log(localStorage);
+          //history.push('/home');
+          
+          this.setState({redirect:true});
+          break;
+        case 204:
+          this.setState({username:"",password:""});
+          //this.setState({error_message:'Username and password don\'t match. Try again.'});
+          break;
+        case 404:
+          this.setState({username:"",password:""});
+          //this.setState({error_message:'User not found.'});
+          break;
+      
+      }
+    })
+  }
+
+  //202 code: user already registered
+  //200 code: success
+  register()
+  {
+    console.log('register lol');
+    const submit_url = 'http://localhost:4000/api/register';  //config.backend_hostname 
+    fetch(submit_url, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', // include, *same-origin, omit
@@ -62,31 +131,15 @@ export default class LoginScreen extends Component
     //if 404: wipe input fields, say username not found
     .then(response =>
     {
-      console.log(response);
-      console.log('code:');
-      console.log(response.status)
-      switch(response.status)
-      {
-        case 200:
-          localStorage.setItem("access_token",response.body.access_token);
-          console.log(localStorage);
-          //history.push('/home');
-          this.setState({error_message:'Success!'});
-          this.setState({redirect:true});
-        case 204:
-          this.setState({username:"",password:""});
-          this.setState({error_message:'Username and password don\'t match. Try again.'});
-        case 404:
-          this.setState({username:"",password:""});
-          this.setState({error_message:'User not found.'});
-      }
+
+
     })
   }
 
   renderRedirect()
   {
     if (this.state.redirect) {
-      return <Redirect to='/home' />
+      return <Redirect push to='/home' />
     }
   }
 
@@ -109,7 +162,15 @@ export default class LoginScreen extends Component
               </FormGroup> 
             </Form>
             <br></br>
-            <Button onClick={this.submit}>Login</Button>
+            <Row>
+              <Col>
+              <Button onClick={this.login}>Login</Button>
+              </Col>
+              <Col>
+              <Button onClick={this.register}>Register</Button>
+              </Col>
+            </Row>
+            
             <br></br>
             <div id="error_message">
               {this.state.error_message}

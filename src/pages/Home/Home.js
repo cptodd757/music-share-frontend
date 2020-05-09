@@ -49,7 +49,7 @@ export default class Home extends Component
           <Col>
           {
             this.state.friends.map(friend =>
-            <FriendIcon friend_username={friend.username} songsFromThem={friend.songs}>
+            <FriendIcon friend_username={friend.username} songsReceived={friend.songsReceived} songsSent={friend.songsSent}>
             </FriendIcon>
             )
           }

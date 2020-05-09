@@ -11,15 +11,27 @@ export default class FriendIcon extends Component {
           {this.props.friend_username}
         </Row>
         <Row>
-          <Col id="fromThem">
+          <Col id="received">
+            <div>
+              They've sent you:
+            </div>
             {
-              this.props.songsFromThem.map(song =>
+              this.props.songsReceived.map(song =>
                 <Song info={song}>
                 </Song>
                 )
             }
           </Col>
-          <Col id="toThem">
+          <Col id="sent">
+            <div>
+              You've sent them:
+            </div>
+            {
+              this.props.songsSent.map(song =>
+                <Song info={song}>
+                </Song>
+                )
+            }
           </Col>
         </Row>
       </div>

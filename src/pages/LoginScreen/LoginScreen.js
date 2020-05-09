@@ -139,10 +139,11 @@ export default class LoginScreen extends Component
       {
         case 200:
           localStorage.setItem("access_token",response.access_token);
+          localStorage.setItem("username",this.state.username);
           console.log(localStorage);
           //history.push('/home');
           
-          this.setState({redirect:true});
+          this.setState({password:"",redirect:true});
           break;
         case 202:
           console.log('hi doing 202 handling');

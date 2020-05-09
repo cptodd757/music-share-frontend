@@ -36,9 +36,9 @@ export default class LoginScreen extends Component
     console.log('state:',this.state)
   }
 
-  //TODO: once submitted, if right, reidrect to a home page. else try again
   login()
   {
+    //status code from backend API
     let code = -1;
     const submit_url = 'http://localhost:4000/api/login';  //config.backend_hostname 
     fetch(submit_url, {
@@ -50,12 +50,7 @@ export default class LoginScreen extends Component
           'Content-Type': 'application/json',
           // 'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': new Buffer(this.state.username + ':' + this.state.password).toString('base64')
-      }//,
-      //redirect: 'follow', // manual, *follow, error
-      //referrer: 'no-referrer'// no-referrer, *client
-      // body: JSON.stringify({username:this.state.username,
-      //                       password:this.state.password}), // body data type must match "Content-Type" header
-    })
+      }})
     //.then(response => response.json())
 
     //TODO: 
@@ -85,10 +80,11 @@ export default class LoginScreen extends Component
       {
         case 200:
           localStorage.setItem("access_token",response.access_token);
+          localStorage.setItem("username",this.state.username);
           console.log(localStorage);
           //history.push('/home');
           
-          this.setState({redirect:true});
+          this.setState({password:"",redirect:true});
           console.log(this.state);
           break;
         case 202:
@@ -108,8 +104,8 @@ export default class LoginScreen extends Component
   //200 code: success
   register()
   {
+    //status code from backend API
     let code = -1;
-    console.log('register lol');
     const submit_url = 'http://localhost:4000/api/register';  //config.backend_hostname 
     fetch(submit_url, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.

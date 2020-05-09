@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LoginScreen from "./LoginScreen/LoginScreen.js";
-import Home from "./Home/Home.js";
+import LoginScreen from "./pages/LoginScreen/LoginScreen.js";
+import Home from "./pages/Home/Home.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App() {

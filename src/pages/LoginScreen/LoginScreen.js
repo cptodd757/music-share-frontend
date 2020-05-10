@@ -171,12 +171,12 @@ export default class LoginScreen extends Component
             <Form>
               <FormGroup>
                 <Label for="username"> Username </Label>
-                <Input id="email" type="email" name="username" id="username" value={this.state.username} onChange={this.handleChange}/>
+                <Input type="email" name="username" id="username" value={this.state.username} onChange={this.handleChange}/>
               </FormGroup> 
               <br></br>
               <FormGroup>
                 <Label for="password"> Password </Label>
-                <Input id="password" type="password" name="password" id="password" value={this.state.password} onChange={this.handleChange}/>
+                <Input type="password" name="password" id="password" value={this.state.password} onChange={this.handleChange}/>
               </FormGroup> 
             </Form>
             <br></br>

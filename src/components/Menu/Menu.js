@@ -97,61 +97,72 @@ export default class Menu extends Component
   render() {
     return (
       <div className="menu">
-        <div id="username">
-          Welcome, {this.props.username}!
-        </div>
-        <br></br>
-
-        <div>
-          <Button onClick={this.addFriendClicked}>
-            Add a Friend!
-          </Button>
+        <div className="card">
+          <div className="username">
+            Welcome, {this.props.username}!
+          </div>
           <br></br>
 
-          <div style={{display: this.state.showAddFriendPrompt ? "block" : "none"}}>
-            <Input id="friend_username" type="textarea" value={this.state.friend_username} onChange={this.updateText}>
-            </Input>
-            <Button onClick={this.submitFriendClicked}>
-              Submit
-            </Button>
+          <div>
+            <div className="buttonwrapper">
+              <Button outline onClick={this.addFriendClicked}>
+                Add a Friend!
+              </Button>
+            </div>
             <br></br>
 
-            <div id="error_message">
-              {this.state.error_message}
+            <div style={{display: this.state.showAddFriendPrompt ? "block" : "none"}}>
+              Username:
+              <Input id="friend_username" type="textarea" value={this.state.friend_username} onChange={this.updateText}>
+              </Input>
+              <br></br>
+              <div className="buttonwrapper">
+                <Button outline onClick={this.submitFriendClicked}>
+                  Submit
+                </Button>
+              </div>
+              <br></br>
+
+              <div id="error_message">
+                {this.state.error_message}
+              </div>
+            </div>
+          </div>
+          <br></br>
+
+          <div>
+            <div className="buttonwrapper">
+              <Button outline onClick={this.sendSongClicked}>
+                Send a Song!
+              </Button>
+            </div>
+            <br></br>
+
+            <div style={{display: this.state.showSendSongPrompt ? "block" : "none"}}>
+              Username:
+              <Input id="friend_username" type="textarea" value={this.state.friend_username} onChange={this.updateText}>
+              </Input>
+              <br></br>
+
+              Link to song:
+              <Input id="song" type="textarea" value={this.state.song} onChange={this.updateText}>
+              </Input>
+              <br></br>
+
+              Note (optional):
+              <Input id="note" type="textarea" value={this.state.note} onChange={this.updateText}>
+              </Input>
+              <br></br>
+
+              <div className="buttonwrapper">
+                <Button outline onClick={this.submitSongClicked}>
+                  Send!
+                </Button>
+                </div>
+              <br></br>
             </div>
           </div>
         </div>
-        <br></br>
-
-        <div>
-          <Button onClick={this.sendSongClicked}>
-            Send a Song!
-          </Button>
-          <br></br>
-
-          <div style={{display: this.state.showSendSongPrompt ? "block" : "none"}}>
-            Username:
-            <Input id="friend_username" type="textarea" value={this.state.friend_username} onChange={this.updateText}>
-            </Input>
-            <br></br>
-
-            Link to song:
-            <Input id="song" type="textarea" value={this.state.song} onChange={this.updateText}>
-            </Input>
-            <br></br>
-
-            Note (optional):
-            <Input id="note" type="textarea" value={this.state.note} onChange={this.updateText}>
-            </Input>
-            <br></br>
-
-            <Button onClick={this.submitSongClicked}>
-              Send!
-            </Button>
-            <br></br>
-          </div>
-        </div>
-
       </div>
     )
   }

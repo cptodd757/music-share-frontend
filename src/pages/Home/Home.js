@@ -41,12 +41,11 @@ export default class Home extends Component
   {
     return (
       <div className="home">
-        Home screen!
         <Row>
-          <Col>
+          <Col xs="3">
             <Menu username={localStorage.getItem("username")}/>
           </Col>
-          <Col>
+          <Col xs="9">
           {
             this.state.friends.map(friend =>
             <FriendIcon friend_username={friend.username} songsReceived={friend.songsReceived} songsSent={friend.songsSent}>

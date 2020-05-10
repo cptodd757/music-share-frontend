@@ -1,1 +1,26 @@
+.card
+{
+    padding: 15px;
+    border: black;
+    border-style: dashed;
+}
 
+.menu
+{
+    padding: 15px;
+}
+
+.buttonwrapper
+{
+    text-align:center;
+}
+
+.username
+{
+    text-align:center;
+}
+
+button
+{
+    text-align:center;
+}

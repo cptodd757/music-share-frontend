@@ -1,0 +1,25 @@
+.friendicon
+{
+    padding: 15px;
+}
+
+.card
+{
+    padding-left: 30px;
+    border: black;
+    border-style: dashed;
+}
+
+.friend_username_class
+{
+    /* color: #da2323; */
+    text-align: center;
+    font-style: bold;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.friend-text
+{
+    font-style: italic;
+}

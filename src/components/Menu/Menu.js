@@ -63,7 +63,9 @@ export default class Menu extends Component
       return response.json();
     })
     .then(response => 
-      {})
+      {
+        this.setState({error_message:response.message})
+      })
   }
 
   submitSongClicked()

@@ -3,6 +3,8 @@ import { Row, Col } from 'reactstrap';
 import Menu from '../../components/Menu/Menu.js';
 import FriendIcon from '../../components/FriendIcon/FriendIcon.js';
 
+import './Home.css';
+
 export default class Home extends Component 
 {
   constructor()
@@ -46,6 +48,13 @@ export default class Home extends Component
             <Menu username={localStorage.getItem("username")}/>
           </Col>
           <Col xs="9">
+            <div className="friends-header-wrapper">
+              
+              <div className="friends-header">
+                Your Friends:
+              </div>
+            
+            </div>
           {
             this.state.friends.map(friend =>
             <FriendIcon friend_username={friend.username} songsReceived={friend.songsReceived} songsSent={friend.songsSent}>

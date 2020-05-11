@@ -1,1 +1,14 @@
-ECHO is on.
+.friends-header
+{
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    border-radius: 5px;
+    border: black;
+    border-style: solid;
+}
+
+.friends-header-wrapper
+{
+    padding: 15px;
+}

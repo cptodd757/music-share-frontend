@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './Menu.css';
 import { Button, Input } from 'reactstrap';
 
+
+
 export default class Menu extends Component 
 {
 
@@ -32,12 +34,12 @@ export default class Menu extends Component
 
   addFriendClicked()
   {
-    this.setState({"showAddFriendPrompt":true});
+    this.setState({"showAddFriendPrompt":!this.state.showAddFriendPrompt});
   }
 
   sendSongClicked()
   {
-    this.setState({"showSendSongPrompt":true});
+    this.setState({"showSendSongPrompt":!this.state.showSendSongPrompt});
   }
 
   submitFriendClicked()
@@ -64,7 +66,8 @@ export default class Menu extends Component
     })
     .then(response => 
       {
-        this.setState({error_message:response.message})
+        this.setState({error_message:response.message});
+        this.setState({"showAddFriendPrompt":false});
       })
   }
 
@@ -93,14 +96,16 @@ export default class Menu extends Component
       return response.json();
     })
     .then(response => 
-      {})
+      {
+        this.setState({"showSendSongPrompt":false});
+      })
   }
 
   render() {
     return (
       <div className="menu">
-        <div className="card">
-          <div className="username">
+        <div className="menu-card">
+          <div className="welcome-username">
             Welcome, {this.props.username}!
           </div>
           <br></br>
@@ -125,9 +130,10 @@ export default class Menu extends Component
               </div>
               <br></br>
 
-              <div id="error_message">
-                {this.state.error_message}
-              </div>
+              
+            </div>
+            <div id="error_message">
+               {this.state.error_message}
             </div>
           </div>
           <br></br>
@@ -141,7 +147,7 @@ export default class Menu extends Component
             <br></br>
 
             <div style={{display: this.state.showSendSongPrompt ? "block" : "none"}}>
-              Username:
+              Friend's username:
               <Input id="friend_username" type="textarea" value={this.state.friend_username} onChange={this.updateText}>
               </Input>
               <br></br>

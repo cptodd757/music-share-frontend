@@ -1,8 +1,9 @@
-.card
+.menu-card
 {
     padding: 15px;
+    border-radius: 5px;
     border: black;
-    border-style: dashed;
+    border-style: solid;
 }
 
 .menu
@@ -15,9 +16,11 @@
     text-align:center;
 }
 
-.username
+.welcome-username
 {
     text-align:center;
+    font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 button

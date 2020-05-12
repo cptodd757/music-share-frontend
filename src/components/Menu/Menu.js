@@ -34,6 +34,9 @@ export default class Menu extends Component
 
   addFriendClicked()
   {
+    console.log(window);
+    console.log(window.closed);
+    console.log(window.Spotify);
     this.setState({"showAddFriendPrompt":!this.state.showAddFriendPrompt});
   }
 

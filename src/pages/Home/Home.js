@@ -5,6 +5,7 @@ import { Row, Col } from 'reactstrap';
 import Menu from '../../components/Menu/Menu.js';
 import FriendIcon from '../../components/FriendIcon/FriendIcon.js';
 import Player from '../../components/Player/Player.js';
+import FriendRequests from '../../components/FriendRequests/FriendRequests.js';
 
 import './Home.css';
 
@@ -24,7 +25,8 @@ export default class Home extends Component
   constructor()
   {
     super();
-    this.state = {"friends":[]}//,
+    this.state = {"friends":[],
+                  "friend_requests":[]}//,
                   // "token":"BQCfrS_cJ4_ikYWsg1GkCk_jtt9BrZMb1dSyX967ishL5v42PfWj57ftf246qkoseXyveBNKSoVJF2zHVqY2S0WbdOzc_LhvpJ3_d5QzPKapzA2Ja5cQy_A9zA0HKHXq7TEhLGCCIhZ6tToC0gFxyYhsp-hJ-6rNbPfqFzBoJwoqrfaBXKAiu6o"}
   }
 
@@ -54,6 +56,8 @@ export default class Home extends Component
     .then(response => 
     {
       this.setState({friends:response.friends});
+      this.setState({friend_requests:response.friend_requests});
+
       console.log(this.state);
       console.log(window.location.hash);
 
@@ -82,6 +86,7 @@ export default class Home extends Component
           <Col xs="3">
             <Menu username={localStorage.getItem("username")}/>
             <Player/>
+            <FriendRequests friend_requests={this.state.friend_requests}/>
           </Col>
           <Col xs="9">
             <div className="friends-header-wrapper">

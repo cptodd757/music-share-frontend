@@ -53,7 +53,6 @@ export default class LoginScreen extends Component
       }})
     //.then(response => response.json())
 
-    //TODO: 
     //if 200: save access token to localstorage, redirect to home page using useHistory
     //if 204: wipe input fields, say password wrong (probably link a "message_at_bottom" state to the jsx)
     //if 404: wipe input fields, say username not found

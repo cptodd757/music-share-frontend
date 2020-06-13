@@ -28,7 +28,6 @@ export default class Player extends Component
       });
       // this.createEventHandlers();
   
-      // finally, connect!
       this.player.connect();
       clearInterval(this.checkPlayerInterval);
       this.createPlayerEventHandlers();

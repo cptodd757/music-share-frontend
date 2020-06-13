@@ -58,13 +58,9 @@ export default class FriendRequests extends Component
                       <Button outline id={friend} onClick={this.acceptRequest} size="sm">
                         Accept!
                       </Button>
-
                     </Col>
                   </Row>
                 </div>
-                
-                
-              
               </div>
             )
           }
